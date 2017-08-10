@@ -17,8 +17,18 @@ app.post('/todos', (req, res) => {
   }).catch((err) => {
     res.status(400).send();
   });
+});
+
+app.get('/todos', (req, res) => {
+
+  Todo.find().then((docs)=>{
+    res.status(200).send(docs);
+  }).catch((err)=>{
+    res.status(400).send();
+  });
 
 });
+
 
 app.listen(3000,()=>{
   console.log('Server has started');
