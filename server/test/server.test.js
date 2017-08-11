@@ -10,10 +10,10 @@ var firstId=new ObjectID();
 var secId=new ObjectID();;
 
 var TodoData = [{
-  _id:firstId,
+  _id: firstId,
   text: 'first test todo'
 }, {
-  _id:secId,
+  _id: secId,
   text: 'second test todo'
 }];
 
@@ -77,7 +77,6 @@ describe('GET /todos', () => {
   it('should get all todos', (done) => {
     request(app)
       .get('/todos')
-      .send()
       .expect(200)
       .end((err, res) => {
         if (err) {
@@ -104,7 +103,6 @@ describe('GET /todos/:id', () => {
 
     request(app)
       .get(`/todos/${id}`)
-      .send()
       .expect(200)
       .end((err, res) => {
           if (err) {
@@ -127,7 +125,6 @@ describe('GET /todos/:id', () => {
 
     request(app)
       .get(`/todos/123546`)
-      .send()
       .expect(404)
       .end(done);
   });
@@ -137,7 +134,6 @@ describe('GET /todos/:id', () => {
 
     request(app)
       .get(`/todos/${id}`)
-      .send()
       .expect(404)
       .end(done);
   });
@@ -151,7 +147,6 @@ describe('DELETE /todos/:id', () => {
 
     request(app)
       .delete(`/todos/${id}`)
-      .send()
       .expect(200)
       .end((err, res) => {
           if (err) {
@@ -174,7 +169,6 @@ describe('DELETE /todos/:id', () => {
 
     request(app)
       .delete(`/todos/21654`)
-      .send()
       .expect(404)
       .end(done);
   });
@@ -184,7 +178,6 @@ describe('DELETE /todos/:id', () => {
 
     request(app)
       .delete(`/todos/${id}`)
-      .send()
       .expect(404)
       .end(done);
   });
