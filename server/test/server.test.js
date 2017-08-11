@@ -96,3 +96,50 @@ describe('GET /todos', () => {
       })
   })
 });
+
+describe('GET /todos/:id', () => {
+
+  it('should get a todo', (done) => {
+    var id=firstId;
+
+    request(app)
+      .get(`/todos/${id}`)
+      .send()
+      .expect(200)
+      .end((err, res) => {
+          if (err) {
+          console.log(err);
+        }
+        Todo.findById(id).then((doc) => {
+          expect(res.body._id).toBe(doc._id.toHexString());
+          done();
+        }).catch((err) => {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        });
+      })
+  });
+
+  it('should return 404 becouse ID is invalid', (done) => {
+    var id=firstId;
+
+    request(app)
+      .get(`/todos/123546`)
+      .send()
+      .expect(404)
+      .end(done);
+  });
+
+  it('should return 404 becouse there is no todo with such ID', (done) => {
+    var id=new ObjectID();
+
+    request(app)
+      .get(`/todos/${id}`)
+      .send()
+      .expect(404)
+      .end(done);
+  });
+
+});
