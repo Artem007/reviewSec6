@@ -17,15 +17,15 @@ var TodoData = [{
   text: 'second test todo'
 }];
 
-beforeEach((done)=>{
-Todo.remove({}).then(()=>{
-  return Todo.insertMany(TodoData);
-}).then((docs)=>{
-  done();
-}).catch((err)=>{
-  console.log(err);
-  done();
-});
+beforeEach((done) => {
+  Todo.remove({}).then(() => {
+    return Todo.insertMany(TodoData);
+  }).then((docs) => {
+    done();
+  }).catch((err) => {
+    console.log(err);
+    done();
+  });
 
 });
 
@@ -137,6 +137,53 @@ describe('GET /todos/:id', () => {
 
     request(app)
       .get(`/todos/${id}`)
+      .send()
+      .expect(404)
+      .end(done);
+  });
+
+});
+
+describe('DELETE /todos/:id', () => {
+
+  it('should delete a todo', (done) => {
+    var id=firstId;
+
+    request(app)
+      .delete(`/todos/${id}`)
+      .send()
+      .expect(200)
+      .end((err, res) => {
+          if (err) {
+          console.log(err);
+        }
+        Todo.findById(id).then((doc) => {
+          expect(doc).toNotExist();
+          done();
+        }).catch((err) => {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        });
+      })
+  });
+
+  it('should delete a todo', (done) => {
+    var id=firstId;
+
+    request(app)
+      .delete(`/todos/21654`)
+      .send()
+      .expect(404)
+      .end(done);
+  });
+
+  it('should delete a todo', (done) => {
+    var id=new ObjectID();
+
+    request(app)
+      .delete(`/todos/${id}`)
       .send()
       .expect(404)
       .end(done);
