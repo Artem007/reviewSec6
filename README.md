@@ -1,6 +1,6 @@
 # TODO REST API #
 
-It is a simple todo API that was writen in Node.js using such technologies :
+It is a simple todo API that was writen in Node.js using next technologies:
 * express
 * mongodb
   * mongoose
