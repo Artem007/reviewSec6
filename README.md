@@ -12,16 +12,6 @@ It is a simple todo API that was writen in Node.js using such technologies :
 
 ### POST /todos
 
-> `expect(object).toExist([message])`
-
-Asserts the given `object` is truthy.
-
-```js
-expect('something truthy').toExist()
-```
-
-Aliases:
-  - `toBeTruthy`
 
 ### toNotExist
 
