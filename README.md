@@ -11,6 +11,7 @@ It is a simple todo API that was writen in Node.js using next technologies:
 ## Routes
 
 ### POST /todos
+Creates todo in a database with a specific properties. Should be used with with POSY http method and in the body of request must be JSON data with only one property specifed - ** text ** property.
 
 ### GET /todos
 
