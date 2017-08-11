@@ -9,6 +9,7 @@ const {app}=require('./../server.js');
 var firstId=new ObjectID();
 var secondId=new ObjectID();;
 
+
 var TodoData = [{
   _id: firstId,
   text: 'first test todo',
@@ -111,7 +112,6 @@ describe('GET /todos/:id', () => {
           console.log(err);
         }
         Todo.findById(id).then((doc) => {
-          console.log(doc);
           expect(res.body._id).toBe(doc._id.toHexString());
           done();
         }).catch((err) => {
