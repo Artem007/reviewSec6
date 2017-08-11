@@ -7,14 +7,16 @@ const {Todo}=require('./../models/todo');
 const {app}=require('./../server.js');
 
 var firstId=new ObjectID();
-var secId=new ObjectID();;
+var secondId=new ObjectID();;
 
 var TodoData = [{
   _id: firstId,
-  text: 'first test todo'
+  text: 'first test todo',
+  completed:true
 }, {
-  _id: secId,
-  text: 'second test todo'
+  _id: secondId,
+  text: 'second test todo',
+  completed:false
 }];
 
 beforeEach((done) => {
@@ -109,6 +111,7 @@ describe('GET /todos/:id', () => {
           console.log(err);
         }
         Todo.findById(id).then((doc) => {
+          console.log(doc);
           expect(res.body._id).toBe(doc._id.toHexString());
           done();
         }).catch((err) => {
@@ -180,6 +183,76 @@ describe('DELETE /todos/:id', () => {
       .delete(`/todos/${id}`)
       .expect(404)
       .end(done);
+  });
+
+});
+
+describe('PATCH /todos/:id', () => {
+
+  it('should update a todo', (done) => {
+    var id=firstId;
+    var text='From patch test';
+    var completed=false;
+
+    request(app)
+      .patch(`/todos/${id}`)
+      .send({text,completed})
+      .expect(200)
+      .end((err, res) => {
+          if (err) {
+          console.log(err);
+        }
+        Todo.findById(id).then((doc) => {
+          expect(doc.text).toBe(text);
+          expect(doc.completed).toBe(completed);
+          expect(doc.completedAt).toNotExist();
+          done();
+        }).catch((err) => {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        });
+      })
+  });
+
+  it('should update a todo', (done) => {
+    var id=secondId;
+    var text='From patch test';
+    var completed=true;
+
+    request(app)
+      .patch(`/todos/${id}`)
+      .send({text,completed})
+      .expect(200)
+      .end((err, res) => {
+          if (err) {
+          console.log(err);
+        }
+        Todo.findById(id).then((doc) => {
+          expect(doc.text).toBe(text);
+          expect(doc.completed).toBe(completed);
+          expect(doc.completedAt).toExist();
+          done();
+        }).catch((err) => {
+          if (err) {
+            console.log(err);
+          }
+          done();
+        });
+      })
+  });
+
+  it('should return 404', (done) => {
+    var text='From patch test';
+    var completed=true;
+
+    request(app)
+      .patch(`/todos/15651fdsf`)
+      .send({text,completed})
+      .expect(404)
+      .end(done);
+
   });
 
 });
