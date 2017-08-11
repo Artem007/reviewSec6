@@ -12,6 +12,14 @@ It is a simple todo API that was writen in Node.js using such technologies :
 
 ### POST /todos
 
+### GET /todos
+
+### GET /todos/id
+
+### DELETE /todos/id
+
+### PATCH /todos/id
+
 
 ### toNotExist
 
