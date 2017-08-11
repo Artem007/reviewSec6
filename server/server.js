@@ -2,8 +2,9 @@ const express=require('express');
 const bodyParser=require('body-parser');
 
 const {mongoose}=require('./db/mongoose');
-const {Todo}=require('./models/todos');
-const {User}=require('./models/users');
+const {ObjectID}=require('mongodb');
+const {Todo}=require('./models/todo');
+const {User}=require('./models/user');
 
 var app=express();
 
@@ -29,6 +30,24 @@ app.get('/todos', (req, res) => {
 
 });
 
+app.get('/todos/:id', (req, res) => {
+
+  var id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
+
+  Todo.findById(id).then((doc) => {
+    if(!doc){
+      return res.status(404).send();
+    }
+    res.status(200).send(doc);
+  }).catch((err) => {
+    res.status(400).send();
+  });
+
+});
 
 app.listen(3000,()=>{
   console.log('Server has started');
