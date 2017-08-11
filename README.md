@@ -1,12 +1,12 @@
-# TODO REST API 
+# TODO REST API #
 
 It is a simple todo API that was writen in Node.js using such technologies :
-*express
-*mongodb
-  *mongoose
-*mocha
-  *expect
-  *supertest
+* express
+* mongodb
+  * mongoose
+* mocha
+  * expect
+  * supertest
 
 ## Routes
 
