@@ -4,19 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node server/server.js",
+    "start": "node server/server.js",
     "test": "SET \"NODE_ENV=test\" && mocha server/**/*.test.js"
   },
-  "engines":{
-    "node":"6.2.2"
+  "engines": {
+    "node": "6.2.2"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.2",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.31",
-    "mongoose": "^4.11.6"
+    "mongoose": "^4.11.6",
+    "validator": "^8.0.0"
   },
   "devDependencies": {
     "expect": "^1.20.2",
