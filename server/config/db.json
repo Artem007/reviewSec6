@@ -1,0 +1,11 @@
+{
+  "development":{
+    "PORT" : "3000",
+    "MONGODB_URI":"mongodb://localhost:27017/Todos",
+    "SECRET":"hkb54jkb345kjb345jkb45"
+  },"test":{
+    "PORT" : "3000",
+    "MONGODB_URI":"mongodb://localhost:27017/TodosTest",
+    "SECRET":"jkn435njkl456jb4nkl6bh3"
+  }
+}
